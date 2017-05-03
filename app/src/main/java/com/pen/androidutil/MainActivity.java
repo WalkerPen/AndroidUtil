@@ -1,5 +1,11 @@
 package com.pen.androidutil;
 
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.graphics.Color;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +23,7 @@ import android.widget.Toast;
 
 import com.pen.androidutil.libs.animation.AnimationFactory;
 import com.pen.androidutil.libs.animation.Builder;
+import com.pen.androidutil.libs.animator.AnimatorHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,9 +45,31 @@ public class MainActivity extends AppCompatActivity {
         mTvScale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startScale();
+                animator();
             }
         });
+    }
+
+    private void animator() {
+        AnimatorHelper
+                .backgroundColor(mTvScale, Color.RED, Color.BLUE)
+                .backgroundColor(mTvScale2, Color.RED, Color.BLUE)
+                .backgroundColor(mTvScale3, Color.RED, Color.BLUE)
+                .interpolator(null)
+                .repeatMode(ValueAnimator.RESTART)
+                .repeatCount(5)
+                .duration(1000)
+                .start();
+
+        /*
+         * ArgbEvaluator：这种评估者可以用来执行类型之间的插值整数值代表ARGB颜色。
+         * FloatEvaluator：这种评估者可以用来执行浮点值之间的插值。
+         * IntEvaluator：这种评估者可以用来执行类型int值之间的插值。
+         * RectEvaluator：这种评估者可以用来执行类型之间的插值矩形值。
+         *
+         * 由于本例是改变View的backgroundColor属性的背景颜色所以此处使用ArgbEvaluator
+         */
+
     }
 
     private void startScale() {
@@ -63,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 .interpolator(new AnticipateInterpolator(2f))
                 .pivotType(AnimationFactory.POINT_RELATIVE_TO_SELF)
                 .point(0.5f, 0.5f)
+                .repeatCount(3)
                 .build();
 
         TranslateAnimation translateAnimation = AnimationFactory.translate()
@@ -76,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                 .repeatMode(AnimationFactory.REPEATMODE_RESTART)
                 .fillAfter()
                 .duration(5000)
-                .repeatCount(3)
                 /*.addAnim(animation)
                 .addAnim(alphaAnimation)*/
                 .addAnim(rotateAnimation)
