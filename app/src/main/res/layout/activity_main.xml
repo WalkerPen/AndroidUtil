@@ -18,7 +18,8 @@
       android:text="scale"/>
 
   <TextView
-      android:layout_gravity="left"
+      android:visibility="gone"
+      android:layout_gravity="center_horizontal"
       android:id="@+id/tv_scale2"
       android:layout_width="100dp"
       android:layout_height="100dp"
@@ -27,6 +28,7 @@
       android:text="scale"/>
 
   <TextView
+      android:visibility="gone"
       android:layout_gravity="right"
       android:id="@+id/tv_scale3"
       android:layout_width="100dp"

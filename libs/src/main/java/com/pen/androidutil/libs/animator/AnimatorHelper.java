@@ -25,6 +25,19 @@ public class AnimatorHelper {
         return new Builder(target, Property.SCALE_Y, values);
     }
 
+    public static Builder scale(final View target, float... values) {
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(values);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                target.setScaleX(value);
+                target.setScaleY(value);
+            }
+        });
+        return new Builder(valueAnimator);
+    }
+
     public static Builder translateX(View target, float... values) {
         return new Builder(target, Property.TRANSLATE_X, values);
     }
@@ -109,7 +122,10 @@ public class AnimatorHelper {
         return new Builder(animator);
     }
 
-    public static Builder color(final Interface.OnColorUpdateLinstener linstener, @Size(2)int... values) {
+    public static Builder color(final Interface.OnColorUpdateLinstener linstener, int... values) {
+        if (values.length == 0) {
+            values = new int[]{0};
+        }
         ValueAnimator valueAnimator = ValueAnimator.ofInt(values);
         valueAnimator.setEvaluator(new ArgbEvaluator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

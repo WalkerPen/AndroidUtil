@@ -49,27 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void animator() {
         AnimatorHelper
-                .color(new Interface.OnColorUpdateLinstener() {
-                    @Override
-                    public void onColorUpdate(int color) {
-                        mTvScale.setBackgroundColor(color);
-                    }
-                }, Color.RED, Color.GREEN)
-                .color(new Interface.OnColorUpdateLinstener() {
-                    @Override
-                    public void onColorUpdate(int color) {
-                        mTvScale2.setBackgroundColor(color);
-                    }
-                }, Color.RED, Color.GREEN)
-                .interpolator(null)
-                .repeatMode(ValueAnimator.RESTART)
-                .duration(5000)
-                .onEnd(new Interface.OnAnimatorEndListener() {
-                    @Override
-                    public void onEnd(Animator animation) {
-                        Log.d("测试", mTvScale2.getX() + "---" + mTvScale2.getY());
-                    }
-                })
+                .rotationX(mTvScale, 0, 90)
+                .duration(500)
                 .start();
 
 
