@@ -1,29 +1,26 @@
 package com.pen.androidutil;
 
-import android.animation.AnimatorSet;
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnticipateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pen.androidutil.libs.animation.AnimationFactory;
-import com.pen.androidutil.libs.animation.Builder;
 import com.pen.androidutil.libs.animator.AnimatorHelper;
+import com.pen.androidutil.libs.animator.Builder;
+import com.pen.androidutil.libs.animator.Interface;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,23 +49,29 @@ public class MainActivity extends AppCompatActivity {
 
     private void animator() {
         AnimatorHelper
-                .backgroundColor(mTvScale, Color.RED, Color.BLUE)
-                .backgroundColor(mTvScale2, Color.RED, Color.BLUE)
-                .backgroundColor(mTvScale3, Color.RED, Color.BLUE)
+                .color(new Interface.OnColorUpdateLinstener() {
+                    @Override
+                    public void onColorUpdate(int color) {
+                        mTvScale.setBackgroundColor(color);
+                    }
+                }, Color.RED, Color.GREEN)
+                .color(new Interface.OnColorUpdateLinstener() {
+                    @Override
+                    public void onColorUpdate(int color) {
+                        mTvScale2.setBackgroundColor(color);
+                    }
+                }, Color.RED, Color.GREEN)
                 .interpolator(null)
                 .repeatMode(ValueAnimator.RESTART)
-                .repeatCount(5)
-                .duration(1000)
+                .duration(5000)
+                .onEnd(new Interface.OnAnimatorEndListener() {
+                    @Override
+                    public void onEnd(Animator animation) {
+                        Log.d("测试", mTvScale2.getX() + "---" + mTvScale2.getY());
+                    }
+                })
                 .start();
 
-        /*
-         * ArgbEvaluator：这种评估者可以用来执行类型之间的插值整数值代表ARGB颜色。
-         * FloatEvaluator：这种评估者可以用来执行浮点值之间的插值。
-         * IntEvaluator：这种评估者可以用来执行类型int值之间的插值。
-         * RectEvaluator：这种评估者可以用来执行类型之间的插值矩形值。
-         *
-         * 由于本例是改变View的backgroundColor属性的背景颜色所以此处使用ArgbEvaluator
-         */
 
     }
 

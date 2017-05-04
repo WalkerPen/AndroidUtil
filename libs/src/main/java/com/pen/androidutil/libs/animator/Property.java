@@ -13,6 +13,8 @@ public class Property {
     public static final String SCALE_Y = "scaleY";
     public static final String TRANSLATE_X = "translationX";
     public static final String TRANSLATE_Y = "translationY";
+    public static final String X = "X";
+    public static final String Y = "Y";
     public static final String ROTATION_X = "rotationX";
     public static final String ROTATION_Y = "rotationY";
     public static final String ROTATION = "rotation";
