@@ -137,4 +137,14 @@ public class AnimatorHelper {
         });
         return new Builder(valueAnimator);
     }
+
+    public static void setWidth(View view, int width) {
+        view.getLayoutParams().width = width;
+        view.requestLayout();
+    }
+
+    public static void setHeight(View view, int height) {
+        view.getLayoutParams().height = height;
+        view.requestLayout();
+    }
 }
