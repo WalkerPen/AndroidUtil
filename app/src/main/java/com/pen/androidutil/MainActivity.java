@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.Interpolator;
@@ -42,30 +43,34 @@ public class MainActivity extends AppCompatActivity {
         mTvScale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                animator();
+                startScale();
             }
         });
     }
 
     private void animator() {
-        AnimatorHelper
-                .rotationX(mTvScale, 0, 90)
-                .duration(500)
-                .start();
 
 
     }
 
     private void startScale() {
-        ScaleAnimation animation = AnimationFactory.scale()
+        ScaleAnimation anim = new ScaleAnimation(1f, 0.5f, 1, 1);
+        ScaleAnimation anim2 = new ScaleAnimation(1f, 1f, 1, 0.5f);
+        AnimationSet set = new AnimationSet(true);
+        set.addAnimation(anim);
+        set.addAnimation(anim2);
+        set.setDuration(500);
+        mTvScale.startAnimation(set);
+        /*ScaleAnimation animation = AnimationFactory.scale()
                 .fromX(1f).toX(0.5f)
                 .fromY(1f).toY(0.5f)
-                .pivotType(AnimationFactory.POINT_RELATIVE_TO_SELF)
-                .point(0.5f, 0.5f)
+                .pivotType(AnimationFactory.POINT_RELATIVE_TO_PARENT)
+                .point(0, 0)
                 .repeatMode(AnimationFactory.REPEATMODE_REVERSE)
-                .build();
+                .duration(1000)
+                .start(mTvScale);*/
 
-        AlphaAnimation alphaAnimation = AnimationFactory.alpha()
+       /* AlphaAnimation alphaAnimation = AnimationFactory.alpha()
                 .fromAlpha(0)
                 .toAlpha(1f)
                 .build();
@@ -83,19 +88,18 @@ public class MainActivity extends AppCompatActivity {
                 .valueType(AnimationFactory.POINT_RELATIVE_TO_SELF)
                 .fromX(-1f)
                 .toX(1f)
-                .build();
+                .build();*/
 
 
-        AnimationSet set = AnimationFactory.set()
+        /*AnimationSet set = AnimationFactory.set()
                 .repeatMode(AnimationFactory.REPEATMODE_RESTART)
                 .fillAfter()
                 .duration(5000)
-                /*.addAnim(animation)
-                .addAnim(alphaAnimation)*/
+                .addAnim(animation)
+                .addAnim(alphaAnimation)
                 .addAnim(rotateAnimation)
                 .addAnim(translateAnimation)
-                .start(true, mTvScale, mTvScale2, mTvScale3);
-        Interpolator interpolator = set.getInterpolator();
+                .start(true, mTvScale, mTvScale2, mTvScale3);*/
     }
 
 }

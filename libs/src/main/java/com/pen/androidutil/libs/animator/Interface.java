@@ -3,6 +3,7 @@ package com.pen.androidutil.libs.animator;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.support.annotation.IntDef;
+import android.support.annotation.IntRange;
 import android.support.annotation.Size;
 
 import java.lang.annotation.ElementType;
