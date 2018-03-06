@@ -18,11 +18,11 @@ public class Builder {
 
     private AnimationSet set;
 
-    private AnimationHelper.OnAnimationStartListener mOnAnimationStartListener;
+    private OnAnimationStartListener mOnAnimationStartListener;
 
-    private AnimationHelper.OnAnimationEndListener mOnAnimationEndListener;
+    private OnAnimationEndListener mOnAnimationEndListener;
 
-    private AnimationHelper.OnAnimationRepeatListener mOnAnimationRepeatListener;
+    private OnAnimationRepeatListener mOnAnimationRepeatListener;
 
     public Builder(Animation animation) {
         set = new AnimationSet(true);
@@ -126,17 +126,17 @@ public class Builder {
         return this;
     }
 
-    public Builder onStart(AnimationHelper.OnAnimationStartListener onAnimationStartListener) {
+    public Builder onStart(OnAnimationStartListener onAnimationStartListener) {
         mOnAnimationStartListener = onAnimationStartListener;
         return this;
     }
 
-    public Builder onEnd(AnimationHelper.OnAnimationEndListener onAnimationEndListener) {
+    public Builder onEnd(OnAnimationEndListener onAnimationEndListener) {
         mOnAnimationEndListener = onAnimationEndListener;
         return this;
     }
 
-    public Builder onRepeat(AnimationHelper.OnAnimationRepeatListener animationRepeatListener) {
+    public Builder onRepeat(OnAnimationRepeatListener animationRepeatListener) {
         mOnAnimationRepeatListener = animationRepeatListener;
         return this;
     }

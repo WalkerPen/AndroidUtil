@@ -24,18 +24,6 @@ public class AnimationHelper {
     @Target(ElementType.PARAMETER)
     public @interface RepeatMode{}
 
-    public interface OnAnimationStartListener{
-        void onStart();
-    }
-
-    public interface OnAnimationEndListener{
-        void onEnd();
-    }
-
-    public interface OnAnimationRepeatListener{
-        void onRepeat();
-    }
-
     public static Builder scale(float from, float to) {
         ScaleAnimation scaleAnimation = new ScaleAnimation(from, to, from, to, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
         return new Builder(scaleAnimation);
